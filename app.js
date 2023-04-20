@@ -5,6 +5,18 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 
+const dbUrl = DB_URL= "mongodb+srv://first-user:tHis5cluster6is7on8fire@clusterzero.tbkebhp.mongodb.net/?retryWrites=true&w=majority";
+
+mongoose.connect(dbUrl, {
+    useNewUrlParser: true, 
+    useUnifiedTopology: true})
+.then(() => {
+    console.log("Connection Open!!!");
+})
+.catch(err => {
+    console.log("Oh NO ERROR!!!!", err)
+});
+
 app.engine("ejs", ejsMate);
 
 app.use(bodyParser.urlencoded({extended: true}));
