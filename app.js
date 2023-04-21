@@ -1,3 +1,6 @@
+if(process.env.NODE_ENV !== "production"){
+    require("dotenv").config();
+}
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejsMate = require("ejs-mate");
@@ -5,7 +8,7 @@ const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
 
-const dbUrl = DB_URL= "mongodb+srv://first-user:tHis5cluster6is7on8fire@clusterzero.tbkebhp.mongodb.net/?retryWrites=true&w=majority";
+const dbUrl = process.env.DB_URL;
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true, 
@@ -36,9 +39,14 @@ app.get("/register", (req, res) => {
     res.render("auth/register");
 });
 
+app.post("/register", (req, res) => {
+    let {username, password} = req.body;
+    res.send(`${username}, ${password}`);
+});
+
 app.get("/home", (req, res) => {
     res.render("home");
-})
+});
 
 
 const port = process.env.PORT || 3000;
