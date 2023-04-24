@@ -38,7 +38,20 @@
                 <br>
                 click <a href="#">here</a> to view the things you've published
                 <br>
-                click <a href="#">here</a> to publish something
+                click <a href="/myposts">here</a> to publish something
+                <div class="container">
+                    <form action="/myposts" method="POST" class="validated-form" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label" for="title">Title</label>
+                            <input class="form-control" type="text" name="username" required autofocus>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="body">Thoughts?</label>
+                            <textarea class="form-control" type="text" id="body" name="body" required></textarea>
+                        </div>
+                        <button>Publish</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
