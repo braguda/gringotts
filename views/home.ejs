@@ -43,11 +43,11 @@
                     <form action="/myposts" method="POST" class="validated-form" novalidate>
                         <div class="mb-3">
                             <label class="form-label" for="title">Title</label>
-                            <input class="form-control" type="text" name="username" required autofocus>
+                            <input class="form-control" type="text" name="title[posts]" required autofocus>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="body">Thoughts?</label>
-                            <textarea class="form-control" type="text" id="body" name="body" required></textarea>
+                            <textarea class="form-control" type="text" id="body" name="body[posts]" required></textarea>
                         </div>
                         <button>Publish</button>
                     </form>
