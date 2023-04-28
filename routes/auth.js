@@ -12,8 +12,7 @@ router.post("/register", catchAsync(async(req, res, next) => {
     try{
         let {email, username, password} = req.body;
         let newUser = new userModel({email, username});
-        let registered = await userModel.register(newUser, password);
-        console.log(registered);
+        await userModel.register(newUser, password);
         req.flash("success", "Registered!")
         res.redirect("/home");
     }catch(e){

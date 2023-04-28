@@ -72,25 +72,39 @@ app.get("/home", (req, res) => {
 });
 
 app.get("/myposts", async(req, res) => {
-    let posts = await postModel.find({});;
+    let posts = await postModel.find({});
     res.render("myposts", {posts});
 });
 
 app.post("/myposts", catchAsync(async(req, res) => {
-    if(!req.body.posts) throw new ExpressError("Incomplete Post data");
-    let newPost = new postModel(req.body.posts);
+    if(!req.body) throw new ExpressError("Incomplete Post data");
+    let {title, body} = req.body;
+    let author = "Kimora"
+    let newPost = new postModel({title, body, author});
     await newPost.save();
-    res.redirect("/home");
+    req.flash("success", "The pennies for your thoughts");
+    res.redirect("/myposts");
 }));
+
+app.get("/myposts/:author", async(req, res) => {
+    let posts = await postModel.find({"author": req.params.author});
+    res.render("myposts", {posts});
+});
+
+app.delete("/myposts/:id", async(req, res) => {
+    let {id } = req.params;
+    await postModel.findByIdAndDelete(id);
+    res.redirect("/myposts");
+});
 
 app.all("*", (req, res, next) => {
     next(new ExpressError("Page not found", 404));
 });
 
 app.use((err, req, res, next) => {
-    const {message = "sommmtinnnng", statusCode = 500} = err
-    res.status( statusCode).send(message);
-    res.send("error");
+    let {statusCode = 500 } = err;
+    if(!err.message) err.message = "sommmmtiiing";
+    res.status(statusCode).render("error", {err});
 });
 
 const port = process.env.PORT || 3000;
