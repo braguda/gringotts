@@ -16,6 +16,7 @@ const userModel = require("./models/user");
 const postModel = require("./models/post");
 const userRoutes = require("./routes/auth");
 const flash = require("connect-flash");
+const {postSchema} = require("./joiSchema");
 
 const dbUrl = process.env.DB_URL;
 
@@ -35,6 +36,16 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
 
+const validatePost = (req, res, next) => {
+    let {error} = postSchema.validate(req.body);
+    if(error) {
+        let msg = error.details.map(element => element.message).join(",");
+        throw new ExpressError(message, 400)
+    }else{
+        next();
+    }
+}
+
 app.set("view engine", "ejs");
 
 app.use(session({
@@ -47,6 +58,7 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24,
     }
 }));
+
 app.use(flash());
 
 app.use(passport.initialize());
@@ -76,7 +88,7 @@ app.get("/myposts", async(req, res) => {
     res.render("myposts", {posts});
 });
 
-app.post("/myposts", catchAsync(async(req, res) => {
+app.post("/myposts", validatePost, catchAsync(async(req, res) => {
     if(!req.body) throw new ExpressError("Incomplete Post data");
     let {title, body} = req.body;
     let author = "Kimora"
