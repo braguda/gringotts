@@ -1,0 +1,32 @@
+<% layout("layouts/boilerplate") %>
+<div class="container">
+    <div class="container row">
+        <div class="card col-6 offset-3">
+            <h2> <%= foundPosts.title %></h2>
+            <p><%= foundPosts.body%></p>
+            <form action="/comments">
+                <button>Like</button>
+            </form>
+        </div>
+    </div>
+    <div class="container row">
+        <div class="card col-6 offset-3 mt-4">
+            <form class="validated-form" action="/comments" method="POST" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="commentBody">Comment:</label>
+                    <textarea class="form-control" type="text" id="commentBody" name="commentBody" required></textarea>
+                </div>
+                <button>Submit</button>
+            </form>
+        </div>
+    </div>
+    <div class="container row">
+        <div class="card col-6 offset-3 mt-3">
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis dolore quo architecto asperiores eius cumque! Molestias explicabo, repellendus, inventore natus animi facere obcaecati non optio voluptate officiis illo illum distinctio?</p>
+            <p># of Likes</p>
+            <form action="/comments">
+                <button>Like</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -16,7 +16,7 @@ const userModel = require("./models/user");
 const postModel = require("./models/post");
 const userRoutes = require("./routes/auth");
 const flash = require("connect-flash");
-const {postSchema} = require("./joiSchema");
+const {postSchemaJoi} = require("./joiSchema");
 
 const dbUrl = process.env.DB_URL;
 
@@ -37,9 +37,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("views", path.join(__dirname, "views"));
 
 const validatePost = (req, res, next) => {
-    let {error} = postSchema.validate(req.body);
+    let {error} = postSchemaJoi.validate(req.body);
     if(error) {
-        let msg = error.details.map(element => element.message).join(",");
+        let message = error.details.map(element => element.message).join(",");
         throw new ExpressError(message, 400)
     }else{
         next();
@@ -79,14 +79,11 @@ app.get("/", (req, res) => {
     res.render("landing");
 });
 
-app.get("/home", (req, res) => {
-    res.render("home");
+app.get("/home", async(req, res) => {
+    let posts = await postModel.find({});
+    res.render("home", {posts});
 });
 
-app.get("/myposts", async(req, res) => {
-    let posts = await postModel.find({});
-    res.render("myposts", {posts});
-});
 
 app.post("/myposts", validatePost, catchAsync(async(req, res) => {
     if(!req.body) throw new ExpressError("Incomplete Post data");
@@ -98,9 +95,9 @@ app.post("/myposts", validatePost, catchAsync(async(req, res) => {
     res.redirect("/myposts");
 }));
 
-app.get("/myposts/:author", async(req, res) => {
-    let posts = await postModel.find({"author": req.params.author});
-    res.render("myposts", {posts});
+app.get("/posts/:id", async(req, res) => {
+    let foundPosts = await postModel.findById(req.params.id);
+    res.render("showPost", {foundPosts});
 });
 
 app.delete("/myposts/:id", async(req, res) => {
@@ -108,6 +105,8 @@ app.delete("/myposts/:id", async(req, res) => {
     await postModel.findByIdAndDelete(id);
     res.redirect("/myposts");
 });
+
+
 
 app.all("*", (req, res, next) => {
     next(new ExpressError("Page not found", 404));
