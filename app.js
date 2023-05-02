@@ -14,9 +14,12 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const userModel = require("./models/user");
 const postModel = require("./models/post");
+const commentModel = require("./models/comments")
 const userRoutes = require("./routes/auth");
 const flash = require("connect-flash");
 const {postSchemaJoi} = require("./joiSchema");
+const {commentSchemaJoi} = require("./joiSchema");
+const post = require("./models/post");
 
 const dbUrl = process.env.DB_URL;
 
@@ -41,6 +44,16 @@ const validatePost = (req, res, next) => {
     if(error) {
         let message = error.details.map(element => element.message).join(",");
         throw new ExpressError(message, 400)
+    }else{
+        next();
+    }
+}
+
+const validateComment = (req, res, next) => {
+    let {error} = commentSchemaJoi.validate(req.body);
+    if(error){
+        let message = error.details.map(element =>element.message).join(",");
+        throw new ExpressError(message, 400);
     }else{
         next();
     }
@@ -96,16 +109,24 @@ app.post("/myposts", validatePost, catchAsync(async(req, res) => {
 }));
 
 app.get("/posts/:id", async(req, res) => {
-    let foundPosts = await postModel.findById(req.params.id);
+    let foundPosts = await postModel.findById(req.params.id).populate("comments");
     res.render("showPost", {foundPosts});
 });
 
-app.delete("/myposts/:id", async(req, res) => {
+app.delete("/posts/:id", async(req, res) => {
     let {id } = req.params;
     await postModel.findByIdAndDelete(id);
-    res.redirect("/myposts");
+    res.redirect("/home");
 });
 
+app.post('/posts/:id/comments', validateComment, catchAsync(async (req, res) => {
+    let foundPost = await postModel.findById(req.params.id);
+    let newComment = new commentModel(req.body.commentBody);
+    foundPost.comments.push(newComment);
+    await newComment.save();
+    await foundPost.save();
+    res.redirect(`/posts/${foundPost._id}`);
+}))
 
 
 app.all("*", (req, res, next) => {
