@@ -3,7 +3,8 @@
     <div class="container row">
         <div class="card col-6 offset-3">
             <h2> <%= foundPosts.title %></h2>
-            <p><%= foundPosts.body%></p>
+            <p><%= foundPosts.body %></p>
+            <p>- <%=foundPosts.author.username %></p>
             <form action="/comments">
                 <button>Like</button>
             </form>

@@ -1,0 +1,16 @@
+<% layout("layouts/boilerplate") %>
+<div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h1>Hello</h1>
+            <% for (let post of foundPosts){ %>
+                <li>
+                    <%= post.body %>
+                </li>
+                <li>
+                    <a class="btn btn-primary" href="/posts/<%=post._id %>/edit">Edit</a>
+                </li>
+            <% } %>
+        </div>
+    </div>
+</div>

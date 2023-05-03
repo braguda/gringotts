@@ -1,0 +1,21 @@
+<% layout("layouts/boilerplate") %><div class="container">
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h1>Edit</h1>
+            <form class="validated-form" action="/posts/<%=foundPost._id %>/?_method=PUT" method="POST" novalidate>
+                <label class="form-label" for="title">Title</label>
+                <input class="form-control" type="text" name="post[title]" id="postTitle" placeholder="<%= foundPost.title %>" required></input>
+                <label class="form-label" for="postBody">Thoughts?</label>
+                <textarea class="form-control" name="post[body]" id="postBody" cols="50" rows="7" required>
+                    <%= foundPost.body %>
+                </textarea>
+                <button>Update</button>
+                <a class="btn" href="/posts/myPosts">Cancel</a>
+            </form>
+            <form action="/posts/<%=foundPost._id%>?_method=DELETE" method="POST">
+                <button class="btn btn-danger">Delete</button>
+            </form> 
+        </div>
+    </div>
+</div>
+<script src="/js/bootstrapValidation.js"></script>

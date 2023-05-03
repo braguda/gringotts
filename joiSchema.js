@@ -1,24 +1,16 @@
-const joi = require("joi");
+const Joi = require("joi");
 
-module.exports.postSchemaJoi = joi.object({
-    post: joi.object({
-        title: joi.string().required(),
-        body: joi.string().required(),
+module.exports.postSchemaJoi = Joi.object({
+    post: Joi.object({
+        title: Joi.string().required(),
+        body: Joi.string().required(),
     }).required()
 });
 
-module.exports.userSchemaJoi = joi.object({
-    user: joi.object({
-        email: joi.string().required(),
-        username: joi.string().required(),
-        password: joi.string().required(),
-    }).required()
-});
-
-module.exports.commentSchemaJoi = joi.object({
-    comment: joi.object({
-        commentBody: joi.string().required(),
-        likes: joi.number().required(),
-        author: joi.string().required()
+module.exports.commentSchemaJoi = Joi.object({
+    comment: Joi.object({
+        commentBody: Joi.string().required(),
+        likes: Joi.number().required(),
+        author: Joi.string().required()
     }).required()
 });

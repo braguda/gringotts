@@ -16,23 +16,20 @@
             <div class="col-md-6">
                 <div class="card">
                     here is your profile avatar along with your other information
-
-                    click <a href="#">here</a> to view the things you've published
-                    click <a href="/myposts">here</a> to publish something
-                    
                     <div class="container">
-                        <form action="/myposts" method="POST" class="validated-form" novalidate>
+                        <form action="/posts" method="POST" class="validated-form" novalidate>
                             <div class="mb-3">
                                 <label class="form-label" for="title">Title</label>
-                                <input class="form-control" type="text" name="title" required autofocus>
+                                <input class="form-control" type="text" name="post[title]" required autofocus>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label" for="body">Thoughts?</label>
-                                <textarea class="form-control" type="text" id="body" name="body" required></textarea>
+                                <textarea class="form-control" type="text" id="body" name="post[body]" required></textarea>
                             </div>
                             <button>Publish</button>
                         </form>
                     </div>
+                <a href="/posts/myposts">My posts</a>
                 </div>
             </div>
         </div>
