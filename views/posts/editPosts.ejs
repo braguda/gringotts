@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-6 offset-3">
             <h1>Edit</h1>
-            <form class="validated-form" action="/posts/<%=foundPost._id %>/?_method=PUT" method="POST" novalidate>
+            <form class="validated-form" action="/posts/<%=foundPost._id %>?_method=PUT" method="POST" novalidate>
                 <label class="form-label" for="title">Title</label>
                 <input class="form-control" type="text" name="post[title]" id="postTitle" placeholder="<%= foundPost.title %>" required></input>
                 <label class="form-label" for="postBody">Thoughts?</label>

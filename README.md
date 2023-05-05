@@ -1,4 +1,10 @@
 # gringotts
 to do:
-create a session so user can log in and a post can be associated with a user
-pass information from database to frontend
+Create comment functionality
+-CRUD operations for comments
+-Add "Likes" feature
+-validate comments forms 
+-Breakaway comment routes
+-Add comment author
+-Populate comments to respective posts
+-add delete comment feature 

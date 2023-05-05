@@ -7,9 +7,11 @@
                 <li>
                     <%= post.body %>
                 </li>
-                <li>
-                    <a class="btn btn-primary" href="/posts/<%=post._id %>/edit">Edit</a>
-                </li>
+                <% if(currentUser && post.author.equals(currentUser._id)){ %>
+                    <li>
+                        <a class="btn btn-primary" href="/posts/<%=post._id %>/edit">Edit</a>
+                    </li>
+                <% } %>
             <% } %>
         </div>
     </div>
