@@ -26,10 +26,16 @@
             <% for (let i of foundPosts.comments){ %> 
                 <p><%= i.commentBody %></p>
                 <p>- <%= i.author.username %></p>
+                <form action="/comments" method="POST">
+                    <button>Like</button>
+                </form>
+                <% if(currentUser && i.author.equals(currentUser._id)){ %>
+                <form action="/posts/<%= foundPosts._id %>/comments/<%= i._id %>?_method=DELETE" method="POST">
+                    <button class=" btn btn-sm btn-danger">Delete</button>
+                </form>
+                <% } %>
             <% } %>
-            <form action="/comments" method="POST">
-                <button>Like</button>
-            </form>
+
         </div>
     </div>
 </div>

@@ -88,7 +88,6 @@ app.use("/posts", postsRoutes);
 app.use("/posts/:id/comments", commentRoutes);
 
 
-
 app.get("/", (req, res) => {
     res.render("landing");
 }); 
