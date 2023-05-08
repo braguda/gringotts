@@ -8,7 +8,6 @@ const CommentSchema = new Schema({
     },
     likes: {
         type: Number,
-        required: true
     },
     author: {
         type: Schema.Types.ObjectId,

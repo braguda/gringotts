@@ -10,7 +10,6 @@ module.exports.postSchemaJoi = Joi.object({
 module.exports.commentSchemaJoi = Joi.object({
     comment: Joi.object({
         commentBody: Joi.string().required(),
-        likes: Joi.number().required(),
-        author: Joi.string().required()
+        likes: Joi.number()
     }).required()
 });

@@ -1,5 +1,5 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({mergeParams: true});
 const Posts = require("../models/post")
 const Comments = require("../models/comments");
 const catchAsync = require("../utils/catchAsync");
@@ -16,14 +16,17 @@ const validateComment = (req, res, next) => {
     }
 };
 
-router.post('/', validateComment, catchAsync(async (req, res) => {
+
+
+router.post("/", validateComment, catchAsync(async (req, res) => {
     let foundPost = await Posts.findById(req.params.id);
-    let newComment = new Comments(req.body.commentBody);
+    let newComment = new Comments(req.body.comment);
     foundPost.comments.push(newComment);
+    newComment.author = req.user._id;
+    newComment.likes = 0;
     await newComment.save();
     await foundPost.save();
-    console.log(foundPost._id);
-    res.redirect(`posts/${foundPost._id}`);
+    res.redirect(`/posts/${foundPost._id}`);
 }));
 
 module.exports = router;

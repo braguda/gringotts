@@ -12,10 +12,10 @@
     </div>
     <div class="container row">
         <div class="card col-6 offset-3 mt-4">
-            <form class="validated-form" action="/comments" method="POST" novalidate>
+            <form class="validated-form" action="/posts/<%= foundPosts._id %>/comments" method="POST" novalidate>
                 <div class="mb-3">
-                    <label class="form-label" for="commentBody">Comment:</label>
-                    <textarea class="form-control" type="text" id="commentBody" name="commentBody" required></textarea>
+                    <label class="form-label" for="commentBody">Comment</label>
+                    <textarea class="form-control" type="text" id="commentBody" name="comment[commentBody]" required></textarea>
                 </div>
                 <button>Submit</button>
             </form>
@@ -23,8 +23,10 @@
     </div>
     <div class="container row">
         <div class="card col-6 offset-3 mt-3">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis dolore quo architecto asperiores eius cumque! Molestias explicabo, repellendus, inventore natus animi facere obcaecati non optio voluptate officiis illo illum distinctio?</p>
-            <p># of Likes</p>
+            <% for (let i of foundPosts.comments){ %> 
+                <p><%= i.commentBody %></p>
+                <p>- <%= i.author.username %></p>
+            <% } %>
             <form action="/comments" method="POST">
                 <button>Like</button>
             </form>

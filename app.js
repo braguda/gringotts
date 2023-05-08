@@ -91,9 +91,9 @@ app.use("/posts/:id/comments", commentRoutes);
 
 app.get("/", (req, res) => {
     res.render("landing");
-});
+}); 
 
-app.get("/home", homePageAccess, catchAsync(async(req, res) => {
+app.get("/home", catchAsync(async(req, res) => {
     let posts = await postModel.find({});
     res.render("home", {posts}); 
 }));

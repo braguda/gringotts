@@ -34,7 +34,12 @@ router.post("/", validatePost, catchAsync(async(req, res) => {
 }));
 
 router.get("/:id", async(req, res) => {
-    let foundPosts = await Posts.findById(req.params.id).populate("comments").populate("author");
+    let foundPosts = await Posts.findById(req.params.id).populate({
+        path: "comments",
+        populate: {
+            path: "author"
+        }
+    }).populate("author");
     res.render("posts/showPost", {foundPosts});
 });
 
