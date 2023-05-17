@@ -1,0 +1,35 @@
+<% layout("layouts/boilerplate") %>
+<div>
+    <div class="container-fluid">
+        <div class="container row">
+            <% for(let i of foundPosts){ %>
+                <% if(i.author.username === username) { %>
+                    <div class="col-8"> 
+                        <p>
+                            <%= i.body %>
+                            <br>
+                            <a class="btn btn-primary float-end" href="/posts/<%= i.id %>">Comment</a>
+                            <form action="" method="POST">
+                                <button class="btn btn-danger float-end">Like</button>
+                            </form>
+                        </p>
+                    </div>
+                <% } %>
+            <% } %>
+            <div class="col-4">
+                <div class="card-title">
+                    <% for(let i of foundUsers){ %>
+                    <h1><%= i.username %></h1>
+                    <br>
+                    <form action="/inne/follow" method="POST">
+                        <input type="hidden" name="_id" value="<%= i._id %>">
+                        <button>Follow</button>
+                    </form>
+                    <% } %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>

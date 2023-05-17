@@ -19,7 +19,8 @@ router.post("/register", catchAsync(async(req, res, next) => {
         req.flash("success", "Registered!")
         res.redirect("/home");
     }catch(e){
-        res.send(e);
+        req.flash("error", e.message)
+        return res.redirect("register");
         next();
     }
 }));

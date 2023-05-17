@@ -18,6 +18,7 @@ const postModel = require("./models/post");
 const userRoutes = require("./routes/auth");
 const postsRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
+const engageRoutes = require("./routes/inne");
 const flash = require("connect-flash");
 const {postSchemaJoi} = require("./joiSchema");
 const {commentSchemaJoi} = require("./joiSchema");
@@ -52,7 +53,6 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24,
     }
 }));
-
 app.use(flash());
 
 app.use(passport.initialize());
@@ -71,28 +71,20 @@ app.use((req, res, next) => {
 const isLoggedIn = (req, res, next) => {
     if(!req.isAuthenticated()){
         req.flash("error", "SIGN IN!");
-        res.redirect("/auth/login");
+        return res.redirect("/auth/login");
     }
     next();
-}
-
-const homePageAccess = (req, res, next) => {
-    if(!req.user){
-        req.flash("success", "SIGN IN");
-        res.redirect("/auth/login");
-    }
-    next()
 }
 app.use("/auth", userRoutes);
 app.use("/posts", postsRoutes);
 app.use("/posts/:id/comments", commentRoutes);
-
+app.use("/inne", engageRoutes);
 
 app.get("/", (req, res) => {
     res.render("landing");
 }); 
 
-app.get("/home", catchAsync(async(req, res) => {
+app.get("/home",isLoggedIn, catchAsync(async(req, res) => {
     let posts = await postModel.find({});
     res.render("home", {posts}); 
 }));

@@ -24,8 +24,15 @@ router.post("/", validateComment, catchAsync(async (req, res) => {
     newComment.likes = 0;
     await newComment.save();
     await foundPost.save();
+    req.flash("succes", "Your comment was posted!");
     res.redirect(`/posts/${foundPost._id}`);
 }));
+
+router.put("/:commentsId", async(req, res) => {
+    let {id, commentsId} = req.params; 
+    await Comments.updateOne({_id: commentsId}, {$inc: {likes: 1}});
+    res.redirect(`/posts/${id}`);
+});
 
 router.delete("/:commentsId", async(req,res) => {
     let {id, commentsId} = req.params;
