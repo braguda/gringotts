@@ -3,11 +3,10 @@ const router = express.Router();
 const Users = require("../models/user");
 const catchAsync = require("../utils/catchAsync");
 
-router.get("/:id", catchAsync(async(req, res) => {
-    let user = req.params.id
-    let data = await Users.findById(user);
-    res.send(data.following);
-    
+router.get("/follow", catchAsync(async(req, res) => {
+    let userID = req.user._id;
+    let followData = await Users.findById(userID);
+    res.render("home", {followData});
 }));
 
 router.post("/follow", catchAsync(async(req, res) => {
@@ -15,7 +14,7 @@ router.post("/follow", catchAsync(async(req, res) => {
     let currentUserId = req.user._id;
     await Users.updateOne({_id: currentUserId}, {$push: {following: _id}});
     
-    res.send("check");
+    res.redirect("/home");
 }));
 
 module.exports = router; 

@@ -15,7 +15,6 @@
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    here is your profile avatar along with your other information
                     <div class="container">
                         <form action="/posts" method="POST" class="validated-form" autocomplete="off" novalidate>
                             <div class="mb-3">
@@ -28,6 +27,11 @@
                             </div>
                             <button>Publish</button>
                         </form>
+                        <div class="container">
+                            <% for(let i of foundUsers){ %> 
+                                <a href="/posts/users/<%=i.username %>"><li><%= i.username %></li></a>
+                            <% } %>
+                        </div>
                     </div>
                 <a href="/posts/myposts">My posts</a>
                 </div>

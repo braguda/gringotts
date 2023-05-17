@@ -85,10 +85,23 @@ app.get("/", (req, res) => {
 }); 
 
 app.get("/home",isLoggedIn, catchAsync(async(req, res) => {
-    let posts = await postModel.find({});
-    res.render("home", {posts}); 
+    let userID = req.user._id;
+    let data = await userModel.findById(userID);
+    let following = data.following;
+    let foundUsers = [];
+    let foundPosts = [];
+    for (let i of following){
+        let newData = await userModel.findById(i);
+        foundUsers.push(newData);
+    }
+    for(let i of foundUsers){
+         foundPosts.push(await postModel.find({author: i._id}));
+        
+        
+    }
+    let posts = foundPosts.flat();
+    res.render("home", {posts, foundUsers}); 
 }));
-
 
 
 app.all("*", (req, res, next) => {
