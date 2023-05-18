@@ -18,8 +18,9 @@ const validatePost = (req, res, next) => {
 
 router.get("/users/:username", async(req, res) => {
     res.locals.username = req.params.username;
-    let foundUsers = await Users.find({username: req.params.username});
+    let data = await Users.find({username: req.params.username});
     let foundPosts = await Posts.find().populate("author");
+    let foundUsers = data[0];
     res.render("posts/profile", {foundPosts, foundUsers});
 });
 

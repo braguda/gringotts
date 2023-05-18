@@ -3,12 +3,14 @@
 
 <div class="container-fluid">
         <div class="container d-flex justify-content-center row">
-            <div class="card mb-3 col-md-6">
+            <div class="card mb-3 pt-3 col-md-6">
                 <ul>
+                    <h3>Your Feed:</h3>
                     <% for (let post of posts){ %>
                     <li>
                         <h3><%= post.title %></h3>
                         <p><%= post.body.substring(0, 35) + "..." %> View <a href="/posts/<%= post.id %>">more</a></p>
+                        <p>- <a href="/posts/users/<%=post.author.username%>"><%= post.author.username %></a></p>
                     </li>
                     <% } %>
                 </ul>
@@ -16,24 +18,31 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="container">
-                        <form action="/posts" method="POST" class="validated-form" autocomplete="off" novalidate>
-                            <div class="mb-3">
-                                <label class="form-label" for="title">Title</label>
-                                <input class="form-control" type="text" name="post[title]" required autofocus>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label" for="body">Thoughts?</label>
-                                <textarea class="form-control" type="text" id="body" name="post[body]" required></textarea>
-                            </div>
-                            <button>Publish</button>
-                        </form>
                         <div class="container">
+                            <h4 class="mb-3 pt-3">Hey <%= currentUser.username %>!</h4>
+                            <h5 class="mb-3">People you follow:</h5>
                             <% for(let i of foundUsers){ %> 
                                 <a href="/posts/users/<%=i.username %>"><li><%= i.username %></li></a>
                             <% } %>
                         </div>
+                        <div class="container pt-3">
+                            <form action="/posts" method="POST" class="validated-form" autocomplete="off" novalidate>
+                                <div class="mb-3">
+                                    <label class="form-label" for="title">Title</label>
+                                    <input class="form-control" type="text" name="post[title]" required autofocus>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label" for="body">Thoughts?</label>
+                                    <textarea class="form-control" type="text" id="body" name="post[body]" required></textarea>
+                                </div>
+                                <button class="btn btn-primary">Publish</button>
+                            </form>
+                        </div>
                     </div>
-                <a href="/posts/myposts">My posts</a>
+                    <div class="container pt-3 pb-3">
+                        <a class="btn btn-secondary" href="/posts/myposts">My posts</a>
+                    </div>
+                    
                 </div>
             </div>
         </div>

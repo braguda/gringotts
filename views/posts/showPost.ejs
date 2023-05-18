@@ -7,7 +7,7 @@
             <h5><%= foundPosts.likes %> likes</h5>
             <p>- <a href="/posts/users/<%=foundPosts.author.username %>"><%=foundPosts.author.username %></a></p>
             <form action="/<%= foundPosts._id %>/likes?_method=PUT" method="POST">
-                <button>Like</button>
+                <button class="btn btn-dark">Like</button>
             </form>
         </div>
     </div>
@@ -18,7 +18,7 @@
                     <label class="form-label" for="commentBody">Comment</label>
                     <textarea class="form-control" type="text" id="commentBody" name="comment[commentBody]" required></textarea>
                 </div>
-                <button>Submit</button>
+                <button class="btn btn-dark">Submit</button>
             </form>
         </div>
     </div>

@@ -95,9 +95,7 @@ app.get("/home",isLoggedIn, catchAsync(async(req, res) => {
         foundUsers.push(newData);
     }
     for(let i of foundUsers){
-         foundPosts.push(await postModel.find({author: i._id}));
-        
-        
+         foundPosts.push(await postModel.find({author: i._id}).populate("author"));
     }
     let posts = foundPosts.flat();
     res.render("home", {posts, foundUsers}); 

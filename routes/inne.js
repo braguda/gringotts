@@ -13,7 +13,6 @@ router.post("/follow", catchAsync(async(req, res) => {
     let {_id} = req.body;
     let currentUserId = req.user._id;
     await Users.updateOne({_id: currentUserId}, {$push: {following: _id}});
-    
     res.redirect("/home");
 }));
 
