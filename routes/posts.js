@@ -16,7 +16,15 @@ const validatePost = (req, res, next) => {
     }
 };
 
-router.get("/users/:username", async(req, res) => {
+const isLoggedIn = (req, res, next) => {
+    if(!req.isAuthenticated()){
+        req.flash("error", "SIGN IN!");
+        return res.redirect("/auth/login");
+    }
+    next();
+}
+
+router.get("/users/:username",isLoggedIn, async(req, res) => {
     res.locals.username = req.params.username;
     let data = await Users.find({username: req.params.username});
     let foundPosts = await Posts.find().populate("author");
@@ -24,13 +32,13 @@ router.get("/users/:username", async(req, res) => {
     res.render("posts/profile", {foundPosts, foundUsers});
 });
 
-router.get("/myPosts", async(req, res) => {
+router.get("/myPosts", isLoggedIn, async(req, res) => {
     let currentUser = req.user._id;
     let foundPosts = await Posts.find({author: currentUser});
     res.render("posts/myPosts", {foundPosts, currentUser});
 });
 
-router.post("/", validatePost, catchAsync(async(req, res) => {
+router.post("/", isLoggedIn, validatePost, catchAsync(async(req, res) => {
     if(!req.body) throw new ExpressError("Incomplete Post data");
     let newPost = new Posts(req.body.post);
     newPost.likes = 0;
@@ -50,24 +58,30 @@ router.get("/:id", async(req, res) => {
     res.render("posts/showPost", {foundPosts}); 
 });
 
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", isLoggedIn, async (req, res) => {
     let foundPost = await Posts.findById(req.params.id)
     res.render("posts/editPosts", { foundPost });
-}); 
+});
 
-router.put("/:id", validatePost, async(req, res) => {
+router.get("/find/name", async (req, res) => {
+    let {username} = req.query
+    res.redirect(`/posts/users/${username}`);
+   });
+
+router.put("/:id",isLoggedIn, validatePost, async(req, res) => {
     let { id } = req.params; 
     await Posts.findByIdAndUpdate(id, { ...req.body.post });
     req.flash("success", "Post Updated!!!")
     res.redirect("/posts/myPosts");
 });
 
-router.put("/:id/likes", async(req, res) => {
+router.put("/:id/likes", isLoggedIn, async(req, res) => {
     let {id} = req.params;
     await Posts.updateOne({_id: id}, {$inc: {likes: 1}});
+    res.redirect(`/posts/${id}`);
 });
 
-router.delete("/:id", async(req, res) => {
+router.delete("/:id",isLoggedIn, async(req, res) => {
     let {id } = req.params;
     await Posts.findByIdAndDelete(id);
     req.flash("success, Post Deleted!!")

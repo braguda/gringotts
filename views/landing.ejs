@@ -6,8 +6,12 @@
           <h5 class="card-title">Welcome!</h5>
           <h6 class="card-subtitle mb-2 text-muted">Find what you're interested in</h6>
           <p class="card-text">Here you can connect with people just like any other social media! Log In or Sign up with your friends today!</p>
+          <% if(!currentUser){ %>
           <a href="/auth/login" class="btn btn-light blk card-link">Log In</a>
           <a href="/auth/register" class="btn btn-dark wht card-link">Register</a>
+          <% } else { %> 
+            <a href="/home" class="btn btn-light blk card-link">Home</a>
+          <% } %>
         </div>
       </div>
 </div>

@@ -99,7 +99,7 @@ app.get("/home",isLoggedIn, catchAsync(async(req, res) => {
     }
     let posts = foundPosts.flat();
     res.render("home", {posts, foundUsers}); 
-}));
+})); 
 
 
 app.all("*", (req, res, next) => {

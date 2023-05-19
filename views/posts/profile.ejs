@@ -8,11 +8,9 @@
                         <li>
                             <h2><%= i.title %></h2>
                             <p><%= i.body %></p>
-                            <p>                                
-                                <a class="btn btn-dark ms-2 float-end" href="/posts/<%= i.id %>">Comment</a>
-                                <form action="" method="POST">
-                                    <button class="btn btn-dark ms-1 float-end">Like</button>
-                                </form>
+                            <p><%= i.likes %> likes</p>
+                            <p>                            
+                                <a class="btn btn-dark ms-2 float-end" href="/posts/<%= i.id %>">View</a>
                             </p>
                         </li>
                     <% } %>
@@ -25,7 +23,7 @@
                     <h1><%= foundUsers.username %></h1>
                     <% if(currentUser.following.includes(foundUsers._id)){ %>
                         <div class="container pb-3">
-                            <span class=" btn btn-secondary">Following &#10003;</span>
+                            <span class=" btn btn-outline-primary">Following &#10003;</span>
                         </div>
                     <% } else { %>
                         <div class="container pb-3">

@@ -4,7 +4,7 @@ const Posts = require("../models/post")
 const Comments = require("../models/comments");
 const catchAsync = require("../utils/catchAsync");
 const ExpressError = require("../utils/expressError");
-const {postSchemaJoi, commentSchemaJoi} = require("../joiSchema");
+const {commentSchemaJoi} = require("../joiSchema");
 
 const validateComment = (req, res, next) => {
     let {error} = commentSchemaJoi.validate(req.body);
@@ -28,7 +28,7 @@ router.post("/", validateComment, catchAsync(async (req, res) => {
     res.redirect(`/posts/${foundPost._id}`);
 }));
 
-router.put("/:commentsId", async(req, res) => {
+router.put("/:commentsId", validateComment, async(req, res) => {
     let {id, commentsId} = req.params; 
     await Comments.updateOne({_id: commentsId}, {$inc: {likes: 1}});
     res.redirect(`/posts/${id}`);

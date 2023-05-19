@@ -6,7 +6,7 @@
             <p><%= foundPosts.body %></p>
             <h5><%= foundPosts.likes %> likes</h5>
             <p>- <a href="/posts/users/<%=foundPosts.author.username %>"><%=foundPosts.author.username %></a></p>
-            <form action="/<%= foundPosts._id %>/likes?_method=PUT" method="POST">
+            <form action="/posts/<%= foundPosts._id %>/likes?_method=PUT" method="POST">
                 <button class="btn btn-dark">Like</button>
             </form>
         </div>
@@ -29,11 +29,11 @@
                 <p>- <%= i.author.username %></p>
                 <h4> <%= i.likes %> likes</h4>
                 <form action="/posts/<%= foundPosts._id %>/comments/<%= i._id %>?_method=PUT" method="POST">
-                    <button>Like</button>
+                    <button class="btn btn-dark">Like</button>
                 </form>
                 <% if(currentUser && i.author.equals(currentUser._id)){ %>
-                <form action="/posts/<%= foundPosts._id %>/comments/<%= i._id %>?_method=DELETE" method="POST">
-                    <button class=" btn btn-sm btn-danger">Delete</button>
+                <form class ="pt-1" action="/posts/<%= foundPosts._id %>/comments/<%= i._id %>?_method=DELETE" method="POST">
+                    <button class=" btn btn-danger">Delete</button>
                 </form>
                 <% } %>
             <% } %>

@@ -15,13 +15,17 @@ router.post("/register", catchAsync(async(req, res, next) => {
     try{
         let {email, username, password} = req.body;
         let newUser = new userModel({email, username});
-        await userModel.register(newUser, password);
-        req.flash("success", "Registered!")
-        res.redirect("/home");
+        let registered = await userModel.register(newUser, password);
+        req.login(registered, err => {
+            if(err) return next(err);
+            req.flash("success", "Registered!")
+            res.redirect("/home");
+        })
+
     }catch(e){
         req.flash("error", e.message)
         return res.redirect("register");
-        next();
+
     }
 }));
 
@@ -35,6 +39,16 @@ router.post("/login", passport.authenticate("local", {failureFlash: true, failur
     delete req.session.retrunTo;
     res.redirect(redirectUrl);
 });
+
+router.get("/logout", (req, res, next) => {
+    req.logout((err) => {
+        if(err){
+            return next(err);
+        }
+        req.flash("success", "You have logged out");
+        res.redirect("/");
+    });
+})
 
 
 module.exports = router;
