@@ -16,4 +16,11 @@ router.post("/follow", catchAsync(async(req, res) => {
     res.redirect("/home");
 }));
 
+router.post("/follow/remove", catchAsync(async(req, res) => {
+    let {_id} = req.body;
+    let currentUserId = req.user._id
+    await Users.findByIdAndUpdate(currentUserId,{$pull: {following: _id}});
+    req.flash("success", "No longer followed");
+    res.redirect("/home");
+}))
 module.exports = router; 

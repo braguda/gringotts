@@ -28,7 +28,7 @@ router.post("/", validateComment, catchAsync(async (req, res) => {
     res.redirect(`/posts/${foundPost._id}`);
 }));
 
-router.put("/:commentsId", validateComment, async(req, res) => {
+router.put("/:commentsId", async(req, res) => {
     let {id, commentsId} = req.params; 
     await Comments.updateOne({_id: commentsId}, {$inc: {likes: 1}});
     res.redirect(`/posts/${id}`);

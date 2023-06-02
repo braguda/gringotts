@@ -25,6 +25,12 @@
                         <div class="container pb-3">
                             <span class=" btn btn-outline-primary">Following &#10003;</span>
                         </div>
+                        <div class="container pb-3">
+                            <form action="/inne/follow/remove" method="POST">
+                                <input type="hidden" name="_id" value="<%= foundUsers._id %>">
+                                <button class="btn btn-danger">Unfollow</button>
+                            </form>
+                        </div>
                     <% } else { %>
                         <div class="container pb-3">
                             <form action="/inne/follow" method="POST">

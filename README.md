@@ -1,9 +1,10 @@
 # gringotts
 to do:
-Clean up follow feature:
-    remove follow button if user is already following (done)
+Create a 404 not found page
+Scrub DB
+toLowerCase new data going to DB
+Capitalize first letter for names comeing from DB
 
-Log out for current user
 
-    display logout button when there is a currentUser
-    display a variation on landing page when there is a currentUser
+
+retrofit to REACT
