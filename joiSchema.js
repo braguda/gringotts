@@ -2,7 +2,6 @@ const Joi = require("joi");
 
 module.exports.postSchemaJoi = Joi.object({
     post: Joi.object({
-        title: Joi.string().required(),
         body: Joi.string().required(),
     }).required()
 });

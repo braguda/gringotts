@@ -45,7 +45,7 @@ router.post("/", isLoggedIn, validatePost, catchAsync(async(req, res) => {
     newPost.author = req.user._id;
     await newPost.save();
     req.flash("success", "The pennies for your thoughts");
-    res.redirect("/home");
+    res.redirect("/posts/myPosts");
 }));
 
 router.get("/:id", async(req, res) => {
@@ -64,7 +64,7 @@ router.get("/:id/edit", isLoggedIn, async (req, res) => {
 });
 
 router.get("/find/name", async (req, res) => {
-    let {username} = req.query
+    let username = req.query.username.toLowerCase();
     res.redirect(`/posts/users/${username}`);
    });
 

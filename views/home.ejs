@@ -1,46 +1,108 @@
 <% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/app.css">
 <link rel="stylesheet" href="/css/home.css">
 
-<div class="container-fluid">
-        <div class="container d-flex justify-content-center row">
-            <div class="card mb-3 pt-3 col-md-6">
-                <ul>
-                    <h3>Your Feed:</h3>
+<div class="home-body">
+    <div class="for-you">
+        <div class="for-you-header">
+            <h4>For You:</h4>
+        </div>
+        <div class="for-you-content">
+            <ul class="mt-4  pt-3">
+                <% for (let post of posts){ %>
+                <li>
+                    <h5><a class="post-author" href="/posts/users/<%=post.author.username%>"><%= post.author.username.charAt(0).toUpperCase()+ post.author.username.slice(1) %></a></h5>
+                    <p><%= post.body.substring(0, 50) + "..." %><a class="post-author" href="/posts/<%= post.id %>"> more</a></p>
+                </li>
+                <hr>
+                <% } %>
+            </ul>        
+        </div>
+    </div>
+    <div class="user-profile">
+        <div class="section">
+            <h4 class="mb-3 pt-3">Hey <%= currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1) %>!</h4> 
+                <div class="item">
+                    <form action="/posts" method="POST" class="validated-form" autocomplete="off" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label" for="body">Thoughts?</label>
+                            <textarea class="form-control txt" rows="7" type="text" id="body" name="post[body]" required></textarea>
+                        </div>
+                        <button class="bttn">Post</button>
+                    </form>
+                </div>
+                <div class="item">
+                    <a class="plain-link"  href="/posts/myposts">My posts</a>
+                </div>
+        </div>
+        <div class="section">
+            <div class="item">
+                <h5 class="mb-3">People you follow:</h5>
+                <% for(let i of foundUsers){ %> 
+                    <li>
+                        <a class="plain-link" href="/posts/users/<%=i.username %>"><%= i.username.charAt(0).toUpperCase() + i.username.slice(1) %></a>
+                    </li>
+                <% } %>
+            </div>
+            <form class="search" action="/posts/find/name" method="GET">
+                <input class="bar" type="text" placeholder="Find your peers" name="username">
+                <button class="bttn-search">Search</button>
+            </form>
+        </div>       
+    </div>
+    <div class="aside">
+        <h4>From our Sponsers</h4>
+        <div >
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum non et repellat architecto ut quae laudantium delectus, laboriosam animi neque praesentium molestias, recusandae officia itaque enim illum impedit voluptatibus excepturi.
+            </p>
+            <hr>
+            <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur ducimus sit quod iure est repellat ipsa, dolor, rem vero praesentium minima, iste culpa repudiandae possimus cum expedita assumenda incidunt temporibus?
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<!-- <div class="container-fluid">
+        <div class="container d-flex justify-content-center row mt-3">
+            <div class="filled-card card mb-3 pt-3 col-md-6">
+                <h4>For You:</h4>
+                <ul class="mt-4  pt-3 card">
                     <% for (let post of posts){ %>
                     <li>
-                        <h3><%= post.title %></h3>
-                        <p><%= post.body.substring(0, 35) + "..." %> View <a href="/posts/<%= post.id %>">more</a></p>
-                        <p>- <a href="/posts/users/<%=post.author.username%>"><%= post.author.username %></a></p>
+                        <h5><a class="post-author" href="/posts/users/<%=post.author.username%>"><%= post.author.username.charAt(0).toUpperCase()+ post.author.username.slice(1) %></a></h5>
+                        <p><%= post.body.substring(0, 35) + "..." %><a href="/posts/<%= post.id %>"> more</a></p>
                     </li>
+                    <hr>
                     <% } %>
                 </ul>
             </div>
             <div class="col-md-6">
-                <div class="card">
+                <div class="bordered-card card">
                     <div class="container">
                         <div class="container">
-                            <h4 class="mb-3 pt-3">Hey <%= currentUser.username %>!</h4>
-                            <h5 class="mb-3">People you follow:</h5>
-                            <% for(let i of foundUsers){ %> 
-                                <a href="/posts/users/<%=i.username %>"><li><%= i.username %></li></a>
-                            <% } %>
+                            <h4 class="mb-3 pt-3">Hey <%= currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1) %>!</h4>
                         </div>
                         <div class="container pt-3">
                             <form action="/posts" method="POST" class="validated-form" autocomplete="off" novalidate>
                                 <div class="mb-3">
-                                    <label class="form-label" for="title">Title</label>
-                                    <input class="form-control" type="text" name="post[title]" required autofocus>
-                                </div>
-                                <div class="mb-3">
                                     <label class="form-label" for="body">Thoughts?</label>
                                     <textarea class="form-control" type="text" id="body" name="post[body]" required></textarea>
                                 </div>
-                                <button class="btn btn-primary">Publish</button>
+                                <button class="bttn">Post</button>
                             </form>
                         </div>
                     </div>
                     <div class="container pt-3 pb-3">
-                        <a class="btn btn-secondary" href="/posts/myposts">My posts</a>
+                        <a class="plain-link" href="/posts/myposts">My posts</a>
+                    </div>
+                    <div class="container pt-3 pb-3">
+                        <h5 class="mb-3">People you follow:</h5>
+                        <% for(let i of foundUsers){ %> 
+                            <li><a class="plain-link" href="/posts/users/<%=i.username %>"><%= i.username.charAt(0).toUpperCase() + i.username.slice(1) %></a></li>
+                        <% } %>
                     </div>
                     
                 </div>
@@ -48,6 +110,6 @@
         </div>
 
     </div>
-</div>
+</div> -->
 
 <script src="/js/bootstrapValidation.js"></script>

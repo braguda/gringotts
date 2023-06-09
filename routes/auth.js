@@ -6,6 +6,10 @@ const catchAsync = require("../utils/catchAsync");
 const ExpressError = require("../utils/expressError");
 const {userSchemaJoi} = require("../joiSchema");
 
+function usernameToLowerCase(req, res, next){
+    req.body.username = req.body.username.toLowerCase();
+    next();
+}
 
 router.get("/register", (req, res) => {
     res.render("auth/register");
@@ -13,7 +17,8 @@ router.get("/register", (req, res) => {
 
 router.post("/register", catchAsync(async(req, res, next) => {
     try{
-        let {email, username, password} = req.body;
+        let {email, password} = req.body;
+        let username = req.body.username.toLowerCase();
         let newUser = new userModel({email, username});
         let registered = await userModel.register(newUser, password);
         req.login(registered, err => {
@@ -33,11 +38,10 @@ router.get("/login", (req, res) => {
     res.render("auth/login");
 });
 
-router.post("/login", passport.authenticate("local", {failureFlash: true, failureRedirect: "/auth/login"}), (req, res) => {
+router.post("/login", usernameToLowerCase, passport.authenticate("local", {failureFlash: true, failureRedirect: "/auth/login"}), (req, res) => {
     req.flash("success", "Hey You!");
-    let redirectUrl ="/home";
     delete req.session.retrunTo;
-    res.redirect(redirectUrl);
+    res.redirect("/home");
 });
 
 router.get("/logout", (req, res, next) => {

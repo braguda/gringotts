@@ -1,9 +1,8 @@
 # gringotts
 to do:
+design layout
 Create a 404 not found page
-Scrub DB
-toLowerCase new data going to DB
-Capitalize first letter for names comeing from DB
+add cloudinary and default image to all users
 
 
 

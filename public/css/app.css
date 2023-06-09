@@ -1,0 +1,48 @@
+li{
+    list-style: none;
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+.bordered-card{
+    border: 3px solid #1D267D;
+    color: black;
+}
+
+.filled-card{
+    background-color: #1D267D;
+    color: white;
+}
+
+.plain-link{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.plain-link:hover{
+    font-size: 20px;
+    transition: .1s;
+}
+
+.bttn-center{
+    text-align: center;
+}
+
+.bttn-search{
+    background-color: #D4ADFC;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    width: 100px;
+    height: 35px
+}
+
+.bttn-search:hover{
+    color: #0C134F;
+
+    transition: .2s;
+}
+
