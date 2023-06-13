@@ -7,7 +7,7 @@ a:hover{
 }
 
 .bordered-card{
-    border: 3px solid #1D267D;
+    border: 3px solid #cecece;
     color: black;
 }
 
@@ -46,3 +46,7 @@ a:hover{
     transition: .2s;
 }
 
+.like-heart{
+    width: 27px;
+    height: 27px;
+}

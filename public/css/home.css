@@ -23,6 +23,21 @@
     overflow: auto;
 }
 
+.pfp{
+    height: 270px;
+    width: 250px;
+}
+
+.pfp-following{
+    height: 50px;
+    width: 50px;
+}
+
+.pfp-feed{
+    height: 75px;
+    width: 75px;
+}
+
 .aside{
     flex-basis: 15%;
     flex-grow: 1;
@@ -70,7 +85,7 @@
     color:#0C134F;
 }
 
-@media all and (max-width: 640px) {
+@media all and (max-width: 1000px) {
     .home-body {
       flex-direction: column;
       flex-grow: 1;

@@ -1,0 +1,44 @@
+a{
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+}
+
+.main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.abtn{
+    border: none;
+    background-color: white;
+}
+
+.og-post{
+    padding: 20px;
+    border-radius: 20px;
+    width: 400px;
+}
+
+.post-body{
+    font-size: 25px;
+}
+
+.comment-content{
+    overflow: auto;
+}
+
+.comment-box{
+    border-radius: 20px;
+    padding: 20px
+}
+
+.comment-body{
+    width: 400px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+

@@ -1,18 +1,35 @@
 <% layout("layouts/boilerplate") %>
-<div class="container">
-    <div class="row">
-        <div class="col-6 offset-3">
-            <h1>Hello</h1>
-            <% for (let post of foundPosts){  %>
-                <li>
-                    <%= post.body %>
-                </li>
-                <% if(currentUser && post.author.equals(currentUser._id)){ %>
-                    <li>
-                        <a class="btn btn-primary" href="/posts/<%=post._id %>/edit">Edit</a>
-                    </li>
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/profile.css">
+
+<div class="container-fluid">
+    <div class="main">
+        <div class="container top-container">
+            <div class="header">
+                <img class="pfp" src="/images/blankphoto.jpg" alt="pfp">
+                <h1><%= foundPosts[0].author.username.charAt(0).toUpperCase() + foundPosts[0].author.username.slice(1) %></h1>
+            </div>
+        </div>
+        <div class="contianer lower-container">
+            <div class="main-content">
+                <div class="content-header pb-3">
+                    <h4>Your posts:</h4>
+                </div>
+                <ul>
+                <% for (let post of foundPosts){  %>
+                    <div class="content-body bordered-card mb-4">
+                        <li  class="pt-3">
+                            <%= post.body %>
+                        </li>
+                    <% if(currentUser && post.author.equals(currentUser._id)){ %>
+                        <li  class="pb-2">
+                            <a class="float-end" href="/posts/<%=post._id %>/edit">Edit</a>
+                        </li>
+                    <% } %>
+                    </div>
                 <% } %>
-            <% } %>
+                </ul>
+            </div>
         </div>
     </div>
 </div>

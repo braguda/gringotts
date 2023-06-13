@@ -34,7 +34,8 @@ router.get("/users/:username",isLoggedIn, async(req, res) => {
 
 router.get("/myPosts", isLoggedIn, async(req, res) => {
     let currentUser = req.user._id;
-    let foundPosts = await Posts.find({author: currentUser});
+    let foundPosts = await Posts.find({author: currentUser}).populate("author");
+    console.log(foundPosts);
     res.render("posts/myPosts", {foundPosts, currentUser});
 });
 
