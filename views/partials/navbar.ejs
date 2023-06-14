@@ -1,13 +1,23 @@
 
 <nav class="navbar navbar-dark navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand logo" href="/">micePace</a>
+      <a class="navbar-brand logo" href="/home">micePace</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" style="color: white" id="navbarNav">
         <ul class="navbar-nav ms-auto">
+          <% if(!currentUser){ %>
 
+          <% } else { %>
+              <li class="nav-item">
+                <a class="nav-link space-link" aria-current="page"  style="color: white" href="/home">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link space-link" href="/auth/logout"  style="color: white">Log Out</a>
+              </li>
+
+          <% } %>
         </ul>
       </div>
     </div>
