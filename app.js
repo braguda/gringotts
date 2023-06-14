@@ -56,18 +56,19 @@ store.on("error", function(err){
     console.log("session store error");
 });
 
-app.use(session({
+const sessionConfig = {
     store: store,
     secret: secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
         httpOnly: true,
-        expires: Date.now() * 1000 * 60 * 60 * 24,
-        maxAge: 1000 * 60 * 60 * 24,
+        expires: Date.now() + 1000 * 60 * 60,
+        maxAge: 1000 * 60 * 60
     }
-}));
+}
 
+app.use(session(sessionConfig));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
