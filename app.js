@@ -7,6 +7,7 @@ const ejsMate = require("ejs-mate");
 const catchAsync = require("./utils/catchAsync")
 const ExpressError = require("./utils/expressError");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const app = express();
 const path = require("path");
 const mongoose = require("mongoose");
@@ -19,11 +20,8 @@ const userRoutes = require("./routes/auth");
 const postsRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
 const engageRoutes = require("./routes/inne");
-const moment = require("moment");
 const flash = require("connect-flash");
-const {postSchemaJoi} = require("./joiSchema");
-const {commentSchemaJoi} = require("./joiSchema");
-const dbUrl = process.env.DB_URL;
+const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/micePace"
 
 mongoose.connect(dbUrl, {
     useNewUrlParser: true, 
@@ -44,8 +42,23 @@ app.use(methodOverride("_method"));
 
 app.set("view engine", "ejs");
 
+const secret = process.env.SECRET || "Odie"; 
+
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: secret
+    }
+});
+
+store.on("error", function(err){
+    console.log("session store error");
+});
+
 app.use(session({
-    secret: "Odie",
+    store: store,
+    secret: secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
@@ -54,8 +67,8 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24,
     }
 }));
-app.use(flash());
 
+app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(userModel.authenticate()));

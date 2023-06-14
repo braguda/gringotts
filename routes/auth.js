@@ -67,15 +67,9 @@ router.get("/editProfile/:id",catchAsync(async(req, res) => {
     res.render("editProfile", {data});
 }));
 
-// router.post("/editProfile", upload.single("image"), (req, res) => {
-//     console.log(req.body, req.file);
-//     res.send("Act a fool girl");
-// });
-
 router.put("/editProfile/:id", upload.array("pfp"), catchAsync(async(req, res) => {
     let updatedProfile = await userModel.findByIdAndUpdate(req.params.id, {...req.body.user});
-    let img = req.files.map(file => ({url: file.path, filename: file.filename})); 
-    console.log(updatedProfile);
+    let img = req.files.map(file => ({url: file.path, filename: file.filename}));
     updatedProfile.pfp.push(...img);
     updatedProfile.pfp.shift();
     await updatedProfile.save();

@@ -40,7 +40,7 @@
                     <% for (let i of foundPosts.comments){ %>
                         <div class="content-body bordered-card mb-4">
                             <p><%= i.commentBody %></p>
-                            <p>- <a href="/posts/users/<%= i.author.username %>"><%= i.author.username.charAt(0).toUpperCase() + i.author.username.slice(1) %></a></p>
+                            <p><a href="/posts/users/<%= i.author.username %>"><%= i.author.username.charAt(0).toUpperCase() + i.author.username.slice(1) %></a></p>
                             <form action="/posts/<%= foundPosts._id %>/comments/<%= i._id %>?_method=PUT" method="POST">
                                 <%= i.likes %> likes %><button class="abtn"><img class="like-heart" src="/images/heart.png" alt=""></button>
                             </form>
