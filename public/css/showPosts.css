@@ -4,29 +4,54 @@ a{
     cursor: pointer;
 }
 
-.main{
+/* .main{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.header{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 30px;
+}
+
+.main-content{
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    padding: 30px;
+} */
+
 .abtn{
     border: none;
     background-color: white;
 }
 
+.pfp{
+    height: 250px;
+    width: 250px;
+    padding: 10px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
 .og-post{
     padding: 20px;
     border-radius: 20px;
-    width: 400px;
 }
 
-.post-body{
+/* .post-body{
     font-size: 25px;
-}
+} */
 
-.comment-content{
+/* .comment-content{
     overflow: auto;
 }
 
@@ -39,6 +64,6 @@ a{
     width: 400px;
     padding: 10px;
     border-radius: 20px;
-}
+} */
 
 

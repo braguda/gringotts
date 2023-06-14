@@ -1,4 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Anybody:wght@600&");
+.navbar{
+    z-index: 1;
+}
 
 .main{
     margin: 0 auto;
@@ -52,12 +55,10 @@
 .login-form{
     margin: 0 auto;
     padding: 20px;
-}
-
-.login-form{
     width: 20rem;
     height: 20rem;
 }
+
 
 .bttn{
     border: none;
@@ -214,6 +215,7 @@
         position: fixed;
         width: 100%;
         top: 0;
+        z-index: 1;
     }
 
     .welcome-display{
@@ -221,15 +223,17 @@
     }
 
     .login{
-        z-index: 0;
+        z-index: 1;
     }
 
     .footer{
         position: fixed;
         bottom: 0;
+        z-index: 2;
     }
 
     .circles li{
         display: none;
+        z-index: -1;
     }
   }

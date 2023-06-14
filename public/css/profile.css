@@ -14,13 +14,15 @@ a{
     height: 250px;
     width: 250px;
     padding: 10px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .main-content{
     overflow: auto;
 }
 
-.content-header{
+.main-content-header{
     display: flex;
     justify-content: center;
 }

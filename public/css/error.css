@@ -1,0 +1,35 @@
+.error-head{
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.error-body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img{
+    width: 500px;
+    height: 450px;
+    border-radius: 20px;
+}
+
+.back{
+    font-size: 36px;
+    text-decoration: none;
+    color: black;
+}
+
+p{
+    font-size: 30px;
+    font-style: bold;
+}
+
+.back:hover{
+    background-color: black;
+    border-radius: 10px;
+    transition: 1s;
+    color: white
+}

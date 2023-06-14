@@ -5,6 +5,7 @@ const Users = require("../models/user");
 const catchAsync = require("../utils/catchAsync");
 const ExpressError = require("../utils/expressError");
 const {postSchemaJoi, commentSchemaJoi} = require("../joiSchema");
+const moment = require("moment");
 
 const validatePost = (req, res, next) => {
     let {error} = postSchemaJoi.validate(req.body);
@@ -41,7 +42,11 @@ router.get("/myPosts", isLoggedIn, async(req, res) => {
 
 router.post("/", isLoggedIn, validatePost, catchAsync(async(req, res) => {
     if(!req.body) throw new ExpressError("Incomplete Post data");
+    let stamp = moment();
+    let date = stamp.format("MM/DD/YYY");
+    let dateStamp = Date(date);
     let newPost = new Posts(req.body.post);
+    newPost.date = dateStamp;
     newPost.likes = 0;
     newPost.author = req.user._id;
     await newPost.save();

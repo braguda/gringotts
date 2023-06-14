@@ -1,8 +1,10 @@
 <% layout("layouts/boilerplate") %>
-<div class="container d-flex justify-content-center p-3">
-    <div class="card">
-        Create your profile:
-        <form action="/auth/register" method="POST" class="validated-form" autocomplete="off" novalidate>
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/landing.css">
+
+<div class="container main">
+    <div class="login">
+        <form action="/auth/register" method="POST" class="validated-form login-form" autocomplete="off" novalidate>
             <div class="mb-2">
                 <label class="form-label" for="email">Email</label>
                 <input class="form-control" type="email" name="email" required autofocus>   
@@ -15,7 +17,7 @@
                 <label class="form-label" for="password">Password</label>
                 <input class="form-control" type="password" name="password" required>
             </div>
-            <button class="btn btn-info">Register</button>
+            <button class="bttn">Register</button>
         </form>
     </div>
 </div>

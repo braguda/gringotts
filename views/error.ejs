@@ -1,13 +1,21 @@
 <% layout("layouts/boilerplate") %>
-<div class="row">
-    <div class="col-6 offset-3">
-        <div class="alert alert-danger pt-3" role="alert">
-            <h4 class="alert-heading">How did you get here?</h4>
-            <p>Got you twisted all up</p>
+<link rel="stylesheet" href="/css/error.css">
+
+
+<div class="container-fluid">
+    <div class="container">
+        <div class="error" role="alert">
+            <div class="error-head">
+                <h1 class="alert-heading">How did you get here?</h1>
+            </div>
             <hr>
-            <p>Nobody's supposed to be here</p>
-            <hr>
-            <p class="mb-0"><%= err.stack %></p>
+            <div class="error-body">
+                <p>Nobody's supposed to be here</p>
+                <br>
+                <img src="/images/404err.gif" alt="">
+                <br>
+                <a class="back" href="/home">Let's go back</a>
+            </div>
         </div>
     </div>
 </div>

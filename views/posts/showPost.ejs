@@ -8,46 +8,56 @@
     <div class="main">
         <div class="container top-container">
             <div class="header">
-                <img class="pfp" src="/images/blankphoto.jpg" alt="pfp">
-                <p><a href="/posts/users/<%=foundPosts.author.username %>"><%=foundPosts.author.username.charAt(0).toUpperCase() + foundPosts.author.username.slice(1) %></a></p>
-                <div class="bordered-card og-post">
-                    <p class="post-body"><%= foundPosts.body %></p>
-                    <form action="/posts/<%= foundPosts._id %>/likes?_method=PUT" method="POST">
-                        <%= foundPosts.likes %> likes<button class="abtn"><img class="like-heart" src="/images/heart.png" alt=""></button>
-                   </form>
-                </div>
+                <img class="pfp" src="<%=foundPosts.author.pfp[0].url %>" alt="pfp">
+                    <a href="/posts/users/<%=foundPosts.author.username %>"><h1><%=foundPosts.author.username.charAt(0).toUpperCase() + foundPosts.author.username.slice(1) %></h1></a>
             </div>
         </div>
-        <div class="contianer middle-container">
-            <div class="main-content">
-                <div class="content-header bordered-card comment-box mb-4">
-                    <form class="validated-form" action="/posts/<%= foundPosts._id %>/comments" method="POST" novalidate>
-                        <div class="mb-3">
-                            <label class="form-label" for="commentBody">Comment</label>
-                            <textarea class="form-control" type="text" id="commentBody" name="comment[commentBody]" required></textarea>
-                        </div>
-                        <button class="bttn">Submit</button>
+        <div class="container middle-container">
+            <div class="main-content pb-3">
+                <div class="content-body bordered-card">
+                    <p><%= foundPosts.body %></p>
+                    <form action="/posts/<%= foundPosts._id %>/likes?_method=PUT" method="POST">
+                        <%= foundPosts.likes %> likes<button class="abtn"><img class="like-heart" src="/images/heart.png" alt=""></button>
                     </form>
                 </div>
             </div>
-            <div class="comment-content">
-                <% for (let i of foundPosts.comments){ %>
-                    <div class="bordered-card comment-body mb-4">
-                        <p><%= i.commentBody %></p>
-                        <p>- <a href="/posts/users/<%= i.author.username %>"><%= i.author.username %></a></p>
-                        <form action="/posts/<%= foundPosts._id %>/comments/<%= i._id %>?_method=PUT" method="POST">
-                            <%= i.likes %> likes %><button class="abtn"><img class="like-heart" src="/images/heart.png" alt=""></button>
+        </div>
+
+        <div class="container lower-container">
+            <div class="main-content">
+                <div class="comment-box pb-3">
+                    <div class="content-body bordered-card">
+                        <form class="validated-form" action="/posts/<%= foundPosts._id %>/comments" method="POST" novalidate>
+                            <div class="mb-3">
+                                <label class="form-label" for="commentBody">Comment</label>
+                                <textarea class="form-control" type="text" id="commentBody" name="comment[commentBody]" required></textarea>
+                            </div>
+                            <button class="bttn">Submit</button>
                         </form>
-                        <% if(currentUser && i.author.equals(currentUser._id)){ %>
-                            <form class ="pt-1" action="/posts/<%= foundPosts._id %>/comments/<%= i._id %>?_method=DELETE" method="POST">
-                                <button class="btn btn-danger">Delete</button>
-                            </form>
-                        <% } %>
                     </div>
-                <% } %>
+                </div>
+                <div class="main-content">
+                    <% for (let i of foundPosts.comments){ %>
+                        <div class="content-body bordered-card mb-4">
+                            <p><%= i.commentBody %></p>
+                            <p>- <a href="/posts/users/<%= i.author.username %>"><%= i.author.username.charAt(0).toUpperCase() + i.author.username.slice(1) %></a></p>
+                            <form action="/posts/<%= foundPosts._id %>/comments/<%= i._id %>?_method=PUT" method="POST">
+                                <%= i.likes %> likes %><button class="abtn"><img class="like-heart" src="/images/heart.png" alt=""></button>
+                            </form>
+                            <% if(currentUser && i.author.equals(currentUser._id)){ %>
+                                <form class ="pt-1" action="/posts/<%= foundPosts._id %>/comments/<%= i._id %>?_method=DELETE" method="POST">
+                                    <button class="btn btn-danger">Delete</button>
+                                </form>
+                            <% } %>
+                        </div>
+                    <% } %>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script src="/js/bootstrapValidation.js"></script>
+
+
+

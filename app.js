@@ -19,6 +19,7 @@ const userRoutes = require("./routes/auth");
 const postsRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
 const engageRoutes = require("./routes/inne");
+const moment = require("moment");
 const flash = require("connect-flash");
 const {postSchemaJoi} = require("./joiSchema");
 const {commentSchemaJoi} = require("./joiSchema");
@@ -98,7 +99,14 @@ app.get("/home",isLoggedIn, catchAsync(async(req, res) => {
          foundPosts.push(await postModel.find({author: i._id}).populate("author"));
     }
     let posts = foundPosts.flat();
-    res.render("home", {posts, foundUsers}); 
+    posts.sort((a,b) => {
+        let keyA = new Date(a.date);
+        let keyB = new Date(b.date);
+        if(keyA < keyB) return 1;
+        if(keyA > keyB) return -1;
+        return 0
+    });
+    res.render("home", {posts, foundUsers});
 })); 
 
 

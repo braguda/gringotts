@@ -11,9 +11,10 @@
             <ul class="mt-4  pt-3">
                 <% for (let post of posts){ %>
                 <li>
-                    <img class="pfp-feed" src="/images/blankphoto.jpg" alt="pfp">
+                    <img class="pfp-feed" src="<%=post.author.pfp[0].url%>" alt="pfp">
                     <h5><a class="post-author" href="/posts/users/<%=post.author.username%>"><%= post.author.username.charAt(0).toUpperCase()+ post.author.username.slice(1) %></a></h5>
-                    <p><%= post.body.substring(0, 50) + "..." %><a class="post-author" href="/posts/<%= post.id %>"> more</a></p>
+                    <p><a class="post-body" href="/posts/<%= post.id %>"><%= post.body%></a></p>
+                    <p class="post-date"><%= post.date.substring(0, 21) %></a></p>
                 </li>
                 <hr>
                 <% } %>
@@ -28,7 +29,7 @@
                         <img class="pfp" src="<%= currentUser.pfp[0].url %>" alt="pfp">
                 </div>
                 <div class="tagline">
-                    <p>"You can take the leading role in my life, IF you quit acting up"</p>
+                    <p><%= currentUser.tagline%></p>
                 </div>
                 <a href="/auth/editProfile/<%= currentUser._id%>">Edit</a>
             </div>
@@ -51,77 +52,42 @@
                 <h5 class="mb-3">People you follow:</h5>
                 <% for(let i of foundUsers){ %> 
                     <li>
-                        <img class="pfp-following" src="/images/blankphoto.jpg" alt="pfp">
+                        <img class="pfp-following mb-3" src="<%=i.pfp[0].url%>" alt="pfp">
                         <a class="plain-link" href="/posts/users/<%=i.username %>"><%= i.username.charAt(0).toUpperCase() + i.username.slice(1) %></a>
                     </li>
                 <% } %>
             </div>
             <form class="search" action="/posts/find/name" method="GET">
-                <input class="bar" type="text" placeholder="Find your peers" name="username">
+                <input class="bar mb-3" type="text" placeholder="Find your peers" name="username">
                 <button class="bttn-search">Search</button>
             </form>
         </div>       
     </div>
     <div class="aside">
-        <h4>From our Sponsers</h4>
-        <div >
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum non et repellat architecto ut quae laudantium delectus, laboriosam animi neque praesentium molestias, recusandae officia itaque enim illum impedit voluptatibus excepturi.
-            </p>
+        <h4>Sponsored</h4>
+        <div class="ad-content">
+            <div class="card ad-item">
+                <img class="adphoto" src="/images/ad1.jpeg" alt="ad">
+                <p class="pt-3">
+                    Free healthcare and guaranteed retirement doing this one trick that the government doesn't want you to know about.
+                </p>
+                <br>
+                <img src="/images/adchoices-logo.png" alt="" class="ad-logo"><a target="_blank" href="https://www.facebook.com">Click Here</a>
+            </div>
             <hr>
-            <p>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Tenetur ducimus sit quod iure est repellat ipsa, dolor, rem vero praesentium minima, iste culpa repudiandae possimus cum expedita assumenda incidunt temporibus?
-            </p>
+            <div class="card ad-item">
+                <img src="/images/ad2.jpeg" alt="ad" class="adphoto">
+                <p class="pt-3">
+                    Tech companies are worried we'll let you in on this secret to permanently erase your information from their servers. 
+                </p>
+                <br> 
+                <img src="/images/adchoices-logo.png" alt="" class="ad-logo"><a target="_blank" href="https://www.aljazeera.com/">Click here</a>
+
+            </div>
+
         </div>
     </div>
 
 </div>
-
-<!-- <div class="container-fluid">
-        <div class="container d-flex justify-content-center row mt-3">
-            <div class="filled-card card mb-3 pt-3 col-md-6">
-                <h4>For You:</h4>
-                <ul class="mt-4  pt-3 card">
-                    <% for (let post of posts){ %>
-                    <li>
-                        <h5><a class="post-author" href="/posts/users/<%=post.author.username%>"><%= post.author.username.charAt(0).toUpperCase()+ post.author.username.slice(1) %></a></h5>
-                        <p><%= post.body.substring(0, 35) + "..." %><a href="/posts/<%= post.id %>"> more</a></p>
-                    </li>
-                    <hr>
-                    <% } %>
-                </ul>
-            </div>
-            <div class="col-md-6">
-                <div class="bordered-card card">
-                    <div class="container">
-                        <div class="container">
-                            <h4 class="mb-3 pt-3">Hey <%= currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1) %>!</h4>
-                        </div>
-                        <div class="container pt-3">
-                            <form action="/posts" method="POST" class="validated-form" autocomplete="off" novalidate>
-                                <div class="mb-3">
-                                    <label class="form-label" for="body">Thoughts?</label>
-                                    <textarea class="form-control" type="text" id="body" name="post[body]" required></textarea>
-                                </div>
-                                <button class="bttn">Post</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="container pt-3 pb-3">
-                        <a class="plain-link" href="/posts/myposts">My posts</a>
-                    </div>
-                    <div class="container pt-3 pb-3">
-                        <h5 class="mb-3">People you follow:</h5>
-                        <% for(let i of foundUsers){ %> 
-                            <li><a class="plain-link" href="/posts/users/<%=i.username %>"><%= i.username.charAt(0).toUpperCase() + i.username.slice(1) %></a></li>
-                        <% } %>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div> -->
 
 <script src="/js/bootstrapValidation.js"></script>

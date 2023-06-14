@@ -5,7 +5,7 @@
     <div class="main">
         <div class="container top-container">
             <div class="header">
-                <img class="pfp" src="/images/blankphoto.jpg" alt="pfp">
+                <img class="pfp" src="<%= foundUsers.pfp[0].url %>" alt="pfp">
                     <h1><%= foundUsers.username.charAt(0).toUpperCase() + foundUsers.username.slice(1)  %></h1>
                     <% if(currentUser.following.includes(foundUsers._id)){ %>
                         <div class="">
@@ -29,7 +29,7 @@
         </div>
         <div class="contianer lower-container">
             <div class="main-content">
-                <div  class="content-header pb-3">
+                <div class="main-content-header pb-3">
                     <h4><%= foundUsers.username.charAt(0).toUpperCase() + foundUsers.username.slice(1)  %>'s posts</h4>
                 </div>
                 <ul>
@@ -37,7 +37,6 @@
                         <% if(i.author.username === username) { %>
                             <li class="mt-3">
                                 <div class="content-body bordered-card">
-                                    <h2><%= i.title %></h2>
                                     <p><%= i.body %></p>
                                     <p><%= i.likes %> likes <img class="like-heart "src="/images/heart.png" alt=""></p>                           
                                     <a class="bttn" href="/posts/<%= i.id %>">Comment</a>
@@ -50,11 +49,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-<!-- <div class="filled-card card mb-3 pt-3 col-md-6">
-
-</div> -->

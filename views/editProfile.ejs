@@ -1,12 +1,12 @@
 <% layout("layouts/boilerplate") %>
-<form action="/auth/editProfile/<%= data._id %>"  enctype="multipart/form-data"  method="POST" class="validated-form" autocomplete="off" novalidate>
+<form action="/auth/editProfile/<%= data._id %>?_method=PUT"  enctype="multipart/form-data"  method="POST" class="validated-form" autocomplete="off" novalidate>
     <div class="mb-2">
         <label class="form-label" for="tagline">Tagline</label>
         <textarea class="form-control txt" name="user[tagline]" id="tagline" cols="30" rows="10" placeholder="Housewife Twirl"><%= data.tagline %></textarea>   
     </div>
     <div class="mb-3">
         <label class="form-label" for="image">Image</label>
-        <input class="form-control" type="file" name="pfp" required>
+        <input class="form-control" type="file" name="pfp">
     </div>
     <button class="btn btn-info">Update</button>
 </form>

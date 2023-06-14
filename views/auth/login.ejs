@@ -1,14 +1,17 @@
 <% layout("layouts/boilerplate") %>
-<div class="container d-flex justify-content-center p-3">
-    <div class="card ">
-        <form class="validated-form" action="/auth/login" method="POST" autocomplete="off" novalidate>
-            <label class="form-label"for="username">Username</label>
-            <input class="form-control" type="text" name="username" required autofocus>
-            <br>
-            <label class="form-label" for="password">Password</label>
-            <input class="form-control" type="password" name="password" required>
-            <br>
-            <button>Log In</button>
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/landing.css">
+
+<div class="container main pt-3">
+    <div class="login">
+        <form class="validated-form login-form" action="/auth/login" method="POST" autocomplete="off" novalidate>
+          <label class="form-label"for="username">Username</label>
+          <input class="form-control" type="text" name="username" required autofocus>
+          <br>
+          <label class="form-label" for="password">Password</label>
+          <input class="form-control" type="password" name="password" required>
+          <br>
+          <button class="bttn">Log In</button>
         </form>
     </div>
 </div>
