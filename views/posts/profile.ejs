@@ -7,6 +7,7 @@
             <div class="header">
                 <img class="pfp" src="<%= foundUsers.pfp[0].url %>" alt="pfp">
                     <h1><%= foundUsers.username.charAt(0).toUpperCase() + foundUsers.username.slice(1)  %></h1>
+                        <div class="tagline">"<%= foundUsers.tagline %>"</div>
                     <% if(currentUser.following.includes(foundUsers._id)){ %>
                         <div class="">
                             <span>Following &#10003;</span>
