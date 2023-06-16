@@ -153,4 +153,16 @@
     .aside{
         display: none;
     }
+
+    .post-author{
+        font-size: 18px;
+    }
+    
+    .post-body{
+    font-size: 12px;
+    }
+
+    .section{
+        font-size: 12px;
+    }
 }
