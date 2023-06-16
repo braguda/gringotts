@@ -53,7 +53,7 @@
                 <h5 class="mb-3">People you follow:</h5>
                 <% for(let i of foundUsers){ %> 
                     <li>
-                        <img class="pfp-following mb-3" src="<%=i.pfp[0].url%>" alt="pfp">
+                        
                         <a class="plain-link" href="/posts/users/<%=i.username %>"><%= i.username.charAt(0).toUpperCase() + i.username.slice(1) %></a>
                     </li>
                 <% } %>
