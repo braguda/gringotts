@@ -205,7 +205,7 @@
 
 }
 
-@media all and (max-width: 1000px) {
+@media only screen and (max-width: 1000px) {
     .greeter {
       flex-direction: column;
       flex-grow: 1;
@@ -236,4 +236,54 @@
         display: none;
         z-index: -1;
     }
+  }
+
+  @media only screen and (max-width: 375px) {
+    .main{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+    }
+
+    .greeter {
+        flex-direction: column;
+        justify-content: center;
+      }
+  
+      .navbar{
+          position: fixed;
+          width: 100%;
+
+          top: 0;
+          z-index: 1;
+      }
+  
+      .welcome-display{
+        display: none;
+      }
+  
+      .login{
+          z-index: 1;
+          height: 300px;
+          width: 350px;
+          font-size: 12px;
+          margin-top: 50px;
+      }
+
+      .register{
+        font-size: 14px;
+      }
+  
+      .footer{
+          position: fixed;
+          bottom: 0;
+          z-index: 2;
+      }
+  
+      .circles li{
+          display: none;
+          z-index: -1;
+      }
+
   }
