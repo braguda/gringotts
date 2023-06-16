@@ -165,4 +165,29 @@
     .section{
         font-size: 12px;
     }
+
+    .nav-bar{
+        z-index: 2;
+    }
+
+    .pfp{
+        height: 170px;
+        width: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .pfp-feed{
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .pfp-following{
+        height: 30px;
+        width: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
 }
