@@ -238,7 +238,7 @@
     }
   }
 
-  @media only screen and (max-width: 375px) {
+  @media only screen and (max-width: 435px) {
     .main{
         display: flex;
         justify-content: center;

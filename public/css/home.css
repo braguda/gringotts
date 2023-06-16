@@ -23,6 +23,8 @@
     flex-grow: 1;
     padding: 40px;
     overflow: auto;
+    width: 100%;
+    margin-right: 35px;
 }
 
 .for-you-header{
@@ -69,7 +71,8 @@
 }
 
 .ad-content{
-    padding: 20px;
+    padding-top: 20px;
+    padding-right: 20px;
 }
 
 .ad-item{
@@ -149,7 +152,7 @@
 
 }
 
-@media only screen and (max-width: 375px) {
+@media only screen and (max-width: 435px) {
     .aside{
         display: none;
     }
