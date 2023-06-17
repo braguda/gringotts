@@ -20,12 +20,8 @@ router.post("/register", catchAsync(async(req, res, next) => {
     try{
         let {email, password} = req.body;
         let username = req.body.username.toLowerCase();
-        let tagline = "Change ME!"
-        let pfp = {
-                url:"https://res.cloudinary.com/dmm49vvvy/image/upload/v1686611923/blankphoto_hno0uv.jpg",
-                filename: "blankphoto_hno0uv"
-                }
-        let newUser = new userModel({email, username, pfp, tagline});
+        let tagline = "Change ME!";
+        let newUser = new userModel({email, username, tagline});
         let registered = await userModel.register(newUser, password);
         req.login(registered, err => {
             if(err) return next(err);
@@ -71,7 +67,6 @@ router.put("/editProfile/:id", upload.array("pfp"), catchAsync(async(req, res) =
     let updatedProfile = await userModel.findByIdAndUpdate(req.params.id, {...req.body.user});
     let img = req.files.map(file => ({url: file.path, filename: file.filename}));
     updatedProfile.pfp.push(...img);
-    updatedProfile.pfp.shift();
     await updatedProfile.save();
     req.flash("success", "Profile updated");
     res.redirect("/home");

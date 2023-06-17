@@ -5,27 +5,47 @@
     <div class="main">
         <div class="container top-container">
             <div class="header">
-                <img class="pfp" src="<%= foundUsers.pfp[0].url %>" alt="pfp">
-                    <h1><%= foundUsers.username.charAt(0).toUpperCase() + foundUsers.username.slice(1)  %></h1>
-                        <div class="tagline">"<%= foundUsers.tagline %>"</div>
-                    <% if(currentUser.following.includes(foundUsers._id)){ %>
-                        <div class="">
-                            <span>Following &#10003;</span>
-                        </div>
-                        <div class="">
-                            <form action="/inne/follow/remove" method="POST">
-                                <input type="hidden" name="_id" value="<%= foundUsers._id %>">
-                                <button class="btn btn-danger mt-3" id="reload">Unfollow</button>
-                            </form>
-                        </div>
-                    <% } else { %>
-                        <div class="">
-                            <form action="/inne/follow" method="POST">
-                                <input type="hidden" name="_id" value="<%= foundUsers._id %>">
-                                <button class="bttn" id="reload">Follow</button>
-                            </form>
-                        </div>
+                
+                <div id="campgroundControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                    <% foundUsers.pfp.forEach((pic, i) => { %> 
+                      <div class="carousel-item <%= i === 0 ? 'active' : ' ' %>">
+                        <img class="d-block w-100 pfp" src="<%= pic.url%>" alt="">
+                      </div>
+                      <% })%>
+                    </div>
+                    <% if(foundUsers.pfp.length > 1){ %>
+                    <a class="carousel-control-prev" href="#campgroundControls" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only"></span>
+                    </a>
+                    <a class="carousel-control-next" href="#campgroundControls" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only"></span>
+                    </a>
                     <% } %>
+                </div>
+
+                <h1><%= foundUsers.username.charAt(0).toUpperCase() + foundUsers.username.slice(1)  %></h1>
+                <div class="tagline">"<%= foundUsers.tagline %>"</div>
+                <% if(currentUser.following.includes(foundUsers._id)){ %>
+                    <div class="">
+                        <span>Following &#10003;</span>
+                    </div>
+                    <div class="">
+                        <form action="/inne/follow/remove" method="POST">
+                            <input type="hidden" name="_id" value="<%= foundUsers._id %>">
+                            <button class="btn btn-danger mt-3" id="reload">Unfollow</button>
+                        </form>
+                    </div>
+                <% } else { %>
+                    <div class="">
+                        <form action="/inne/follow" method="POST">
+                            <input type="hidden" name="_id" value="<%= foundUsers._id %>">
+                            <button class="bttn" id="reload">Follow</button>
+                        </form>
+                    </div>
+                <% } %>
             </div>
         </div>
         <div class="contianer lower-container">

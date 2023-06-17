@@ -27,7 +27,27 @@
             <div class="greeting">
                 <h4 class="mb-3 pt-3">Hey <%= currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1) %>!</h4>
                 <div class="img-container">
-                        <img class="pfp" src="<%= currentUser.pfp[0].url %>" alt="pfp">
+                    
+                    <div id="campgroundControls" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                        <% currentUser.pfp.forEach((pic, i) => { %> 
+                          <div class="carousel-item <%= i === 0 ? 'active' : ' ' %>">
+                            <img class="d-block w-100 pfp" src="<%= pic.url%>" alt="">
+                          </div>
+                          <% })%>
+                        </div>
+                        <% if(currentUser.pfp.length > 1){ %>
+                        <a class="carousel-control-prev" href="#campgroundControls" role="button" data-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only"></span>
+                        </a>
+                        <a class="carousel-control-next" href="#campgroundControls" role="button" data-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="sr-only"></span>
+                        </a>
+                        <% } %>
+                    </div>
+
                 </div>
                 <div class="tagline">
                     <p><%= currentUser.tagline%></p>
