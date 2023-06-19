@@ -10,10 +10,10 @@ a{
     align-items: center;
     padding: 30px;
 }
+
 .pfp{
-    height: 250px;
-    width: 250px;
-    padding: 10px;
+    height: 350px;
+    width: 350px;
     border-radius: 50%;
     object-fit: cover;
 }
