@@ -65,7 +65,9 @@
     font-weight: 225;
 }
 
-.post-date{
+.post-info{
+    display: flex;
+    justify-content: space-between;
     color: gray;
     font-size: 12px;
 }
@@ -105,7 +107,21 @@
     border-radius: 20px;
 }
 
+.bttn-link{
+    background-color: #5C469C;
+    height: 40px;
+    width: 130px;
+    color: white;
+    border: none;
+    border-radius: 20px;
+}
+
 .bttn:hover{
+    background-color: #D4ADFC;
+    transition: .2s;
+}
+
+.bttn-link:hover{
     background-color: #D4ADFC;
     transition: .2s;
 }
@@ -123,6 +139,8 @@
     background-color: #D4ADFC;
     transition: .2s;
 }
+
+
 
 .txt{
     border: 1.5px solid #0C134F;
@@ -192,5 +210,15 @@
         width: 30px;
         border-radius: 50%;
         object-fit: cover;
+    }
+
+    .for-you{
+        overflow: auto;
+        height: 450px;
+    }
+
+    .follow-list{
+        height: 235px;
+        overflow: auto;
     }
 }

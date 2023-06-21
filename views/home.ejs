@@ -11,10 +11,13 @@
             <ul class="mt-4  pt-3">
                 <% for (let post of posts){ %>
                 <li>
-                    <img class="pfp-feed" src="<%=post.author.pfp[0].url%>" alt="pfp">
+                    <img class="pfp-feed" src="<%=post.author.pfp.url%>" alt="pfp">
                     <h5><a class="post-author" href="/posts/users/<%=post.author.username%>"><%= post.author.username.charAt(0).toUpperCase()+ post.author.username.slice(1) %></a></h5>
                     <p><a class="post-body" href="/posts/<%= post.id %>"><%= post.body%></a></p>
-                    <p class="post-date"><%= post.date.substring(0, 21) %></a></p>
+                    <p class="post-info">
+                        <span><%= post.date.substring(0, 21) %> </span>
+                        <span><%= post.likes%> likes <img class="like-heart" src="/images/heart.png" alt=""></span>
+                    </p>
                 </li>
                 <hr>
                 <% } %>
@@ -22,36 +25,20 @@
         </div>
     </div>
     <div class="user-profile">
-        <div class="section">
+        <div class="user-info-section">
             <div class="greeting">
                 <h4 class="mb-3 pt-3">Hey <%= currentUser.username.charAt(0).toUpperCase() + currentUser.username.slice(1) %>!</h4>
                 <div class="img-container">
-                    <div id="pfpExample" class="carousel slide">
-                        <div class="carousel-inner">
-                            <% currentUser.pfp.forEach((pic, i) => { %> 
-                                <div class="carousel-item <%= i === 0 ? 'active' : ' ' %>">
-                                    <img class="d-block w-100 pfp" src="<%= pic.url%>" alt="">
-                                </div>
-                            <% })%>
-                            <% if(currentUser.pfp.length > 1){ %>
-                                <button class="carousel-control-prev" type="button" data-bs-target="#pfpExample" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#pfpExample" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>            
-                            <% } %>    
-                        </div>
-                    </div>
+                    <img class="pfp" src="<%= currentUser.pfp.url %>" alt="">
                 </div>
                 <div class="tagline">
                     <p><%= currentUser.tagline%></p>
                 </div>
-                <a href="/auth/editProfile/<%= currentUser._id%>">Edit</a>
+                <div class="edit-buttons">
+                    <a class="btn bttn-center bttn-link" href="/userhome/editProfile/<%= currentUser._id %>/photo">Manage Photo</a>
+                    <a class="btn bttn-center bttn-link" href="/userhome/editProfile/<%= currentUser._id%>/tagline">Edit Tagline</a>
+                </div>
             </div>
-             
                 <div class="item">
                     <form action="/posts" method="POST" class="validated-form" autocomplete="off" novalidate>
                         <div class="mb-3">
@@ -65,15 +52,18 @@
                     <a class="plain-link"  href="/posts/myPosts">My posts</a>
                 </div>
         </div>
-        <div class="section">
+        <div class="follow-section">
             <div class="item">
                 <h5 class="mb-3">People you follow:</h5>
-                <% for(let i of foundUsers){ %> 
-                    <li>
-                        
-                        <a class="plain-link" href="/posts/users/<%=i.username %>"><%= i.username.charAt(0).toUpperCase() + i.username.slice(1) %></a>
-                    </li>
-                <% } %>
+                <ul class="follow-list">
+                    <% for(let i of foundUsers){ %> 
+                        <li class="pt-2">
+                            <img src="<%= i.pfp.url %>" alt="" class="pfp-following">
+                            <a class="plain-link" href="/posts/users/<%=i.username %>"><%= i.username.charAt(0).toUpperCase() + i.username.slice(1) %></a>
+                        </li>
+                    <% } %>
+                </ul>
+
             </div>
             <form class="search" action="/posts/find/name" method="GET">
                 <input class="bar mb-3" type="text" placeholder="Find your peers" name="username">
@@ -109,3 +99,6 @@
 </div>
 
 <script src="/js/bootstrapValidation.js"></script>
+
+
+

@@ -1,0 +1,19 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/app.css">
+
+<div class="container-fluid">
+    <div class="container">
+        <form action="/userhome/editProfile/<%=data._id %>/tagline?_method=PUT"  method="POST" class="validated-form" autocomplete="off" novalidate>
+            <div class="mt-3 mb-3">
+                <textarea class="form-control txt" name="user[tagline]" id="tagline" cols="30" rows="10" placeholder="Housewife Twirl" required><%= data.tagline %></textarea>   
+            </div>
+            <button class="bttn bttn-center">Update</button>
+        </form>
+        <br>
+        <a class="btn bttn-link" href="/home">Cancel</a>
+    </div>
+</div>
+
+
+<script src="/js/bootstrapValidation.js"></script>

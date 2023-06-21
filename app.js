@@ -19,7 +19,8 @@ const postModel = require("./models/post");
 const userRoutes = require("./routes/auth");
 const postsRoutes = require("./routes/posts");
 const commentRoutes = require("./routes/comments");
-const engageRoutes = require("./routes/inne");
+const engageRoutes = require("./routes/follow");
+const userHomepageRoutes = require("./routes/userhome");
 const flash = require("connect-flash");
 const dbUrl = process.env.DB_URL || "mongodb://127.0.0.1:27017/micePace"
 
@@ -94,7 +95,8 @@ const isLoggedIn = (req, res, next) => {
 app.use("/auth", userRoutes);
 app.use("/posts", postsRoutes);
 app.use("/posts/:id/comments", commentRoutes);
-app.use("/inne", engageRoutes);
+app.use("/follow", engageRoutes);
+app.use("/userhome", userHomepageRoutes);
 
 app.get("/", (req, res) => {
     res.render("landing");

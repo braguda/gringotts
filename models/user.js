@@ -8,12 +8,10 @@ const UserSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    pfp: [
-        {
+    pfp: {
             url: String,
             filename: String
-        },
-    ],
+    },
     tagline:{
         type: String
     },

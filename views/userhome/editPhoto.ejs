@@ -1,0 +1,32 @@
+<% layout("layouts/boilerplate") %>
+<link rel="stylesheet" href="/css/app.css">
+<link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/editProfile.css">
+
+<div class="container-fluid">
+    <div class="main container">
+        <div class="img-container">
+            <img class="pfp" src="<%= data.pfp.url %>" alt="">
+            <% if (data.pfp.filename !== "blankphoto_hno0uv"){ %>
+                <form class="mb-3" action="/userhome/deletePhoto/<%= data._id %>?_method=PUT" method="POST">
+                    <div>
+                        <input type="hidden" name="oldPic" value="<%= data.pfp.filename%>">
+                    </div>
+                    <button class="btn btn-danger mt-2">Delete</button>
+                </form>
+            <% } %>
+        </div>
+        <div class="upload-container">
+            <form action="/userhome/editProfile/<%= data._id %>/photo?_method=PUT"  enctype="multipart/form-data"  method="POST" class="validated-form" novalidate>
+                <div class="mb-3">
+                    <input class="form-control" type="file" name="pfp" required>
+                </div>
+                <button class="bttn bttn-center">Update</button>
+            </form>
+        </div>
+        <br>
+        <a class="btn bttn-link" href="/home">Cancel</a>
+    </div>
+</div>
+
+<script src="/js/bootstrapValidation.js"></script>

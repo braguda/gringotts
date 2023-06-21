@@ -4,31 +4,6 @@ a{
     cursor: pointer;
 }
 
-/* .main{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.header{
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    padding: 30px;
-}
-
-.main-content{
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    padding: 30px;
-} */
-
 .abtn{
     border: none;
     background-color: white;
@@ -47,23 +22,5 @@ a{
     border-radius: 20px;
 }
 
-/* .post-body{
-    font-size: 25px;
-} */
-
-/* .comment-content{
-    overflow: auto;
-}
-
-.comment-box{
-    border-radius: 20px;
-    padding: 20px
-}
-
-.comment-body{
-    width: 400px;
-    padding: 10px;
-    border-radius: 20px;
-} */
 
 

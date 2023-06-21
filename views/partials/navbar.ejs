@@ -7,17 +7,14 @@
       </button>
       <div class="collapse navbar-collapse" style="color: white" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <% if(!currentUser){ %>
-
-          <% } else { %>
-              <li class="nav-item">
-                <a class="nav-link space-link" aria-current="page"  style="color: white" href="/home">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link space-link" href="/auth/logout"  style="color: white">Log Out</a>
-              </li>
-
-          <% } %>
+          <% if(currentUser){ %>
+            <li class="nav-item">
+              <a class="nav-link space-link" aria-current="page"  style="color: white" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link space-link" href="/auth/logout"  style="color: white">Log Out</a>
+            </li>
+          <% }  %>
         </ul>
       </div>
     </div>
