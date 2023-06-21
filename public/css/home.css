@@ -72,6 +72,11 @@
     font-size: 12px;
 }
 
+.like-form{
+    color: gray;
+    font-size: 12px;
+}
+
 .ad-content{
     padding-top: 20px;
     padding-right: 20px;
@@ -138,6 +143,11 @@
 .bttn-search:hover{
     background-color: #D4ADFC;
     transition: .2s;
+}
+
+.heart-btn{
+    border: none;
+    background-color: white;
 }
 
 

@@ -14,10 +14,14 @@
                     <img class="pfp-feed" src="<%=post.author.pfp.url%>" alt="pfp">
                     <h5><a class="post-author" href="/posts/users/<%=post.author.username%>"><%= post.author.username.charAt(0).toUpperCase()+ post.author.username.slice(1) %></a></h5>
                     <p><a class="post-body" href="/posts/<%= post.id %>"><%= post.body%></a></p>
-                    <p class="post-info">
-                        <span><%= post.date.substring(0, 21) %> </span>
-                        <span><%= post.likes%> likes <img class="like-heart" src="/images/heart.png" alt=""></span>
-                    </p>
+                    <div class="post-info">
+                        <div><%= post.date.substring(0, 21) %> </div>
+                        <div class="like-form">
+                            <form action="/posts/<%= post._id %>/likes?_method=PUT" method="POST">
+                                <%= post.likes %> likes<button class="heart-btn"><img class="like-heart" src="/images/heart.png" alt=""></button>
+                            </form>
+                        </div>
+                    </div>
                 </li>
                 <hr>
                 <% } %>
@@ -35,8 +39,8 @@
                     <p><%= currentUser.tagline%></p>
                 </div>
                 <div class="edit-buttons">
-                    <a class="btn bttn-center bttn-link" href="/userhome/editProfile/<%= currentUser._id %>/photo">Manage Photo</a>
-                    <a class="btn bttn-center bttn-link" href="/userhome/editProfile/<%= currentUser._id%>/tagline">Edit Tagline</a>
+                    <a class="btn bttn-center bttn-link mt-1" href="/userhome/editProfile/<%= currentUser._id %>/photo">Manage Photo</a>
+                    <a class="btn bttn-center bttn-link mt-1" href="/userhome/editProfile/<%= currentUser._id%>/tagline">Edit Tagline</a>
                 </div>
             </div>
                 <div class="item">
